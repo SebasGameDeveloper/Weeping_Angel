@@ -7,7 +7,7 @@ namespace Configuration
     {
         [Header("FootStep Audio")]
         [Tooltip("Array de clips de paso para variacion")]
-        public AudioClip[] footStepClips;
+        public AudioClip[] footstepClips;
         
         [Range(0f, 1f)]
         public float footStepVolume = 0.7f;
