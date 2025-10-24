@@ -34,6 +34,7 @@ namespace Components
                 return;
             //Audio aleatorio
             AudioClip clip = audioConfig.footstepClips[Random.Range(0, audioConfig.footstepClips.Length)];
+            Debug.Log("[EnemyAudioController] Playing footstep sound: " + clip.name);
             
             //Variaciones en el pitch
             float pitch = Random.Range(audioConfig.pitchRange.x, audioConfig.pitchRange.y);

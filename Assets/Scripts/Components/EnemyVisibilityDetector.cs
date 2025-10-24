@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Components
 {
-    [RequireComponent(typeof(Renderer))]
+    [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class EnemyVisibilityDetector : MonoBehaviour, IVisibilityDetector
     {
         //Usare un metodo de frustum culling  y raycast para detectar si el enemigo es visible para la camara principal
@@ -17,7 +17,7 @@ namespace Components
 
         private Camera _mainCamera;
         private Transform _cameraTransform;
-        private Renderer _renderer;
+        private SkinnedMeshRenderer _renderer;
         private Coroutine _detectionCoroutine;
         private bool _isVisible;
         private bool _wasVisible;
@@ -26,7 +26,7 @@ namespace Components
 
         private void Awake()
         {
-            _renderer = GetComponent<Renderer>();
+            _renderer = GetComponent<SkinnedMeshRenderer>();
             _mainCamera = Camera.main;
 
             if (_mainCamera != null)

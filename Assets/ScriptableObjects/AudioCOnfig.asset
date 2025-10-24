@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86608df5a6544bac9ecd8d9332aa733f, type: 3}
+  m_Name: AudioCOnfig
+  m_EditorClassIdentifier: Assembly-CSharp::Configuration.AudioConfiguration
+  footstepClips:
+  - {fileID: 8300000, guid: 46996b331496f0649934f2990cd47425, type: 3}
+  - {fileID: 8300000, guid: e940b0de11cd1e849b35feb4dae61528, type: 3}
+  - {fileID: 8300000, guid: c0eedcca865ab60418335ba8063a0c51, type: 3}
+  footStepVolume: 0.7
+  pitchRange: {x: 0.9, y: 1.1}
+  maxTensionDistance: 20
+  minTensionDistance: 3
+  minVolume: 0.1
+  maxVolume: 1
+  volumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
