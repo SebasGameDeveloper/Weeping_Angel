@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 46996b331496f0649934f2990cd47425, type: 3}
   - {fileID: 8300000, guid: e940b0de11cd1e849b35feb4dae61528, type: 3}
   - {fileID: 8300000, guid: c0eedcca865ab60418335ba8063a0c51, type: 3}
-  footStepVolume: 0.7
+  footStepVolume: 0.702
   pitchRange: {x: 0.9, y: 1.1}
   maxTensionDistance: 20
   minTensionDistance: 3
