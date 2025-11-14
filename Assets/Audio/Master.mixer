@@ -102,13 +102,20 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: e9bdf2d2da46a1d42b1c96595c0b22e2
+    name: FootstepsVolume
+  - guid: 2a25c94bcc19544498b2e293b551fd54
+    name: FootstepsCutoff
+  - guid: 2fb713cf57f44434fbefb9a2b361b492
+    name: MusicVolume
   m_AudioMixerGroupViews:
   - guids:
     - e4028b731a1af7e4c9fd56844079973b
     - 5c4a8a704ddfe6643bd868eab323b56b
     - fe37f74245dcaef469277ec6f0f9fabc
     - d66b89cd2d7fc2d44b1e8f2dee8d2b08
+    - 17535a966f8f2284697ce321c0f4a5d4
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -156,7 +163,10 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 9958c205922e73b4d9292926effef8cd
-  m_FloatValues: {}
+  m_FloatValues:
+    e9bdf2d2da46a1d42b1c96595c0b22e2: 10.437403
+    f3c97b3757fb64643a43a94ac443f35b: 0
+    2a25c94bcc19544498b2e293b551fd54: 22000
   m_TransitionOverrides: {}
 --- !u!244 &715533786083616320
 AudioMixerEffectController:
@@ -187,10 +197,27 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 7726014970623804963}
+  - {fileID: 6613315867336970608}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &6613315867336970608
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: f98dfc3e12fb1644cb4b9ec7f9b6af84
+  m_EffectName: Lowpass Simple
+  m_MixLevel: 8f54082d98146bc419adada5549f07cc
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 2a25c94bcc19544498b2e293b551fd54
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &7726014970623804963
 AudioMixerEffectController:
   m_ObjectHideFlags: 3

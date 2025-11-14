@@ -1,4 +1,5 @@
 ﻿using System;
+using Configuration;
 using UnityEngine;
 using AudioConfiguration = Configuration.AudioConfiguration;
 
@@ -15,16 +16,22 @@ namespace Components
         [SerializeField] private Transform enemyTransform;
         
         private AudioSource _audioSource;
-
+        private AudioMixerController _mixerController;
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _mixerController = FindFirstObjectByType<AudioMixerController>();
+            
+            if (_mixerController == null)
+            {
+                Debug.LogError("[DynamicTensionAudio] AudioMixerController NO encontrado!");
+                Debug.LogError("SOLUCIÓN: Crea manualmente un GameObject con AudioMixerController en la escena.");
+                return; //Importante: salir si no existe
+            }
+            
+            
             ValidateReferences();
-        }
-
-        private void Update()
-        {
-            UpdateTensionVolume();
+            ConfigureAudioSource();
         }
         
         private void ValidateReferences()
@@ -46,28 +53,46 @@ namespace Components
             }
         }
         
+        private void ConfigureAudioSource()
+        {
+            if (_audioSource != null && audioConfig != null)
+            {
+                _audioSource.playOnAwake = true;
+                _audioSource.loop = true;
+                _audioSource.spatialBlend = 0f; //2D para música
+                
+                //Asignar al Mixer Group
+                if (audioConfig.audioMixer != null)
+                {
+                    var musicGroup = audioConfig.audioMixer.FindMatchingGroups("TensionMusic");
+                    if (musicGroup.Length > 0)
+                    {
+                        _audioSource.outputAudioMixerGroup = musicGroup[0];
+                        Debug.Log("[DynamicTensionAudio] AudioSource conectado a TensionMusic Mixer Group");
+                    }
+                    else
+                    {
+                        Debug.LogError("[DynamicTensionAudio] No se encontró 'TensionMusic' en el Mixer!");
+                    }
+                }
+            }
+        }
+        
+        private void Update()
+        {
+            UpdateTensionVolume();
+        }
+        
         //Calculare y actualizare el volumen basándose en la distancia al enemigo :D :S
         private void UpdateTensionVolume()
         {
-            if (playerTransform == null || enemyTransform == null || audioConfig == null)
+            if (playerTransform == null || enemyTransform == null || _mixerController == null)
                 return;
 
             float distance = Vector3.Distance(playerTransform.position, enemyTransform.position);
-            //mapear distancia a volumen usando InverseLerp >:D
-            float normalizedDistance = Mathf.InverseLerp(
-                audioConfig.minTensionDistance,
-                audioConfig.maxTensionDistance,
-                distance);
             
-            //Curva de volumen
-            float curveValue = audioConfig.volumeCurve.Evaluate(1f - normalizedDistance);
-
-            float targeVolume = Mathf.Lerp(
-                audioConfig.minVolume,
-                audioConfig.maxVolume,
-                curveValue);
-            
-            _audioSource.volume = targeVolume;
+            //El AudioMixerController maneja TODA la lógica de audio <3
+            _mixerController.UpdateAudioByDistance(distance);
         }
     }
 }

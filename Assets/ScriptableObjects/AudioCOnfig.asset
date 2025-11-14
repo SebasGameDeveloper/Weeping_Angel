@@ -12,15 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86608df5a6544bac9ecd8d9332aa733f, type: 3}
   m_Name: AudioCOnfig
   m_EditorClassIdentifier: Assembly-CSharp::Configuration.AudioConfiguration
+  audioMixer: {fileID: 24100000, guid: 0711dbe86fb158a4dbfa8e467f74c833, type: 2}
+  musicVolumeParameter: MusicVolume
+  footstepsVolumeParameter: FootstepsVolume
+  footstepsCutoffParameter: FootstepsCutoff
   footstepClips:
   - {fileID: 8300000, guid: 46996b331496f0649934f2990cd47425, type: 3}
   - {fileID: 8300000, guid: e940b0de11cd1e849b35feb4dae61528, type: 3}
   - {fileID: 8300000, guid: c0eedcca865ab60418335ba8063a0c51, type: 3}
-  footStepVolume: 0.702
+  footStepVolume: 1
   pitchRange: {x: 0.9, y: 1.1}
+  footstepsBaseVolume: 5
+  footstepsVolumeBoost: 15
+  footstepsFarCutoff: 600
+  footstepsNearCutoff: 22000
+  footstepsFarPitch: 0.95
+  footstepsNearPitch: 0.7
   maxTensionDistance: 20
   minTensionDistance: 3
-  minVolume: 0.1
+  musicFarVolume: -15
+  musicNearVolume: -5
+  musicDuckingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  footstepsVolumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minVolume: 0.385
   maxVolume: 1
   volumeCurve:
     serializedVersion: 2

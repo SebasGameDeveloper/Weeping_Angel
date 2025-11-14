@@ -9,6 +9,8 @@ namespace Core
         private readonly Animator _animator;
         private readonly Transform _playerTransform;
         
+        private static readonly int SpeedHash = Animator.StringToHash("Speed");
+        
         public PursuingState(IMovement movement, Animator animator, Transform playerTransform)
         {
             _movement = movement;
@@ -18,12 +20,19 @@ namespace Core
         
         public void OnEnter()
         {
-            _movement.StartMoving();
             if (_animator != null)
             {
                 _animator.speed = 1f;
-                //Pendiente de verificacion porque no estoy seguro de requerir otro parametro :S
+                _animator.SetFloat(SpeedHash, 1f);
             }
+            
+            _movement.StartMoving();
+            
+            /*if (_animator != null)
+            {
+                _animator.speed = 1f;
+                //Pendiente de verificacion porque no estoy seguro de requerir otro parametro :S
+            }*/
         }
         public void OnUpdate()
         {

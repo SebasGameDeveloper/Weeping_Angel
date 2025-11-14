@@ -8,6 +8,8 @@ namespace Core
         private readonly IMovement _movement;
         private readonly Animator _animator;
         
+        private static readonly int SpeedHash = Animator.StringToHash("Speed");
+        
         public FrozenState(IMovement movement, Animator animator)
         {
             _movement = movement;
@@ -20,12 +22,19 @@ namespace Core
             if (_animator != null)
             {
                 _animator.speed = 0f;
-                _animator.Play("Walk", 0, 0);
+                _animator.SetFloat(SpeedHash, 0f);
+                //_animator.Play("Walk", 0, 0);
+                _animator.SetFloat(SpeedHash, 0f);
             }
         }
         public void OnUpdate()
         {
             //Enemigo permanece congelado! <------ OJO :)
+            if (_animator != null && _animator.speed != 0f)
+            {
+                _animator.speed = 0f;
+                _animator.SetFloat(SpeedHash, 0f);
+            }
         }
         
         public void OnExit()
