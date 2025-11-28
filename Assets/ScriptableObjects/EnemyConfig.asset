@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e503868fe54456a01ce8737650d650, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::Configuration.EnemyConfiguration
-  moveSpeed: 3.5
+  moveSpeed: 2
   activationRange: 15
   stoppingDistance: 1.5
   visibilityCheckInterval: 0.1
   frustumMargin: 0.1
   detectionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 640
   walkSpeedParameter: Speed
+  avoidancePriority: 50
+  avoidanceRadius: 0.5

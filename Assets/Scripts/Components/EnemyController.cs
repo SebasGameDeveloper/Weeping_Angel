@@ -19,6 +19,9 @@ namespace Components
         [SerializeField] private EnemyMovement movement;
 
         private EnemyStateMachine _stateMachine;
+        
+        // NUEVO: Evento público al que se suscribirán Audio y Susurros
+        public event Action OnEnemyActivated; 
 
         private void Awake()
         {
@@ -29,8 +32,6 @@ namespace Components
         private void Start()
         {
             visibilityDetector.StartDetection();
-            
-            //Evento para cambio de visibilidad
             visibilityDetector.OnVisibilityChanged += OnVisibilityChanged;
         }
 
@@ -41,33 +42,32 @@ namespace Components
 
         private void ValidateReferences()
         {
-            if (playerTransform == null)
-            {
+            if (playerTransform == null) {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                    playerTransform = player.transform;
-                else
-                    Debug.LogError("[EnemyController] No encontro al player");
+                if (player != null) playerTransform = player.transform;
             }
-
-            if (animator == null)
-                animator = GetComponent<Animator>();
-            
-            if (visibilityDetector == null)
-                visibilityDetector = GetComponent<EnemyVisibilityDetector>();
-            
-            if (movement == null)
-                movement = GetComponent<EnemyMovement>();
+            if (animator == null) animator = GetComponent<Animator>();
+            if (visibilityDetector == null) visibilityDetector = GetComponent<EnemyVisibilityDetector>();
+            if (movement == null) movement = GetComponent<EnemyMovement>();
         }
         
         private void InitializeStateMachine()
         {
+            // Pasamos "NotifyActivation" como argumento extra al constructor
             _stateMachine = new EnemyStateMachine(
                 transform,
                 playerTransform,
                 movement,
                 animator,
-                config);
+                config,
+                NotifyActivation // <--- CALLBACK
+            );
+        }
+        
+        // Método puente que invoca el evento público
+        private void NotifyActivation()
+        {
+            OnEnemyActivated?.Invoke();
         }
 
         private void OnVisibilityChanged(bool isVisible)
@@ -77,10 +77,7 @@ namespace Components
 
         private void OnDestroy()
         {
-            if (visibilityDetector != null)
-            {
-                visibilityDetector.OnVisibilityChanged -= OnVisibilityChanged;
-            }
+            if (visibilityDetector != null) visibilityDetector.OnVisibilityChanged -= OnVisibilityChanged;
         }
     }
 }

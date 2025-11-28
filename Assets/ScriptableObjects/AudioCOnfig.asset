@@ -15,21 +15,30 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 0711dbe86fb158a4dbfa8e467f74c833, type: 2}
   musicVolumeParameter: MusicVolume
   footstepsVolumeParameter: FootstepsVolume
-  footstepsCutoffParameter: FootstepsCutoff
+  footstepsBassBoostParameter: FootstepsBassBoost
+  footstepsReverbParameter: FootstepsReverbDecay
   footstepClips:
-  - {fileID: 8300000, guid: 46996b331496f0649934f2990cd47425, type: 3}
-  - {fileID: 8300000, guid: e940b0de11cd1e849b35feb4dae61528, type: 3}
+  - {fileID: 8300000, guid: 7651c7ed467dd4f45a75c3969c10ddde, type: 3}
+  - {fileID: 8300000, guid: e5253b85f8c43204b8c76ea33f7868a9, type: 3}
   - {fileID: 8300000, guid: c0eedcca865ab60418335ba8063a0c51, type: 3}
-  footStepVolume: 1
+  heavyImpactClips: []
+  footStepVolume: 2
   pitchRange: {x: 0.9, y: 1.1}
-  footstepsBaseVolume: 5
-  footstepsVolumeBoost: 15
-  footstepsFarCutoff: 600
-  footstepsNearCutoff: 22000
-  footstepsFarPitch: 0.95
-  footstepsNearPitch: 0.7
-  maxTensionDistance: 20
-  minTensionDistance: 3
+  footstepsBaseVolume: 12
+  footstepsVolumeBoost: 1.5
+  footstepsNearDecay: 0.3
+  footstepsFarDecay: 1.5
+  footstepsFarBassBoost: 0
+  footstepsNearBassBoost: 0
+  footstepsFarPitch: 1
+  footstepsNearPitch: 1
+  maxTensionDistance: 10
+  minTensionDistance: 1
+  whisperClips:
+  - {fileID: 8300000, guid: b64c1f5ff61a0cb4abf0b4bbf6b5ca45, type: 3}
+  - {fileID: 8300000, guid: 05214143bc6b89841b33089574b946bd, type: 3}
+  - {fileID: 8300000, guid: bb0ca382604e9cd498800a4037c8dc34, type: 3}
+  - {fileID: 8300000, guid: 1c0e26d7e90022d4cb3d9c5d004de06e, type: 3}
   musicFarVolume: -15
   musicNearVolume: -5
   musicDuckingCurve:
@@ -72,32 +81,6 @@ MonoBehaviour:
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  minVolume: 0.385
-  maxVolume: 1
-  volumeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0

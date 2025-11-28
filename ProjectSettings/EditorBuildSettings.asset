@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/OutdoorsScene.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 90bd1a3ce283a1240a9d20f758a0ab49, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5d3fcc469b13d994ea7cc65239a1f295, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 47509e2177cc12c46bd806892ddf9ebd, type: 2}
   m_UseUCBPForAssetBundles: 0

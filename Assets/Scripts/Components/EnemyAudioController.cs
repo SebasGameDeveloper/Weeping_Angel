@@ -1,99 +1,83 @@
-﻿using System;
+﻿using UnityEngine;
 using Configuration;
-using UnityEngine;
 using AudioConfiguration = Configuration.AudioConfiguration;
 using Random = UnityEngine.Random;
 
-
 namespace Components
 {
-    [RequireComponent(typeof(AudioSource))]
     public class EnemyAudioController : MonoBehaviour
     {
         [SerializeField] private AudioConfiguration audioConfig;
         [SerializeField] private Transform playerTransform;
+        
+        [Header("Audio Sources")]
+        [SerializeField] private AudioSource mainStepSource;
+        [SerializeField] private AudioSource heavyImpactSource;
 
-        private AudioSource _audioSource;
         private AudioMixerController _mixerController;
 
         private void Awake()
         {
-            _audioSource = GetComponent<AudioSource>();
-            ConfigureAudioSource();
-
-            if (playerTransform == null)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                    playerTransform = player.transform;
-            }
+            if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+            ConfigureAudioSources();
         }
 
         private void Start()
         {
             _mixerController = AudioMixerController.Instance;
-            if (_mixerController == null)
-            {
-                Debug.LogError("[EnemyAudioController] No se encontró AudioMixerController en la escena!");
-            }
         }
 
-        private void ConfigureAudioSource()
+        private void ConfigureAudioSources()
         {
-            if (_audioSource != null && audioConfig != null)
+            if (audioConfig != null && audioConfig.audioMixer != null)
             {
-                _audioSource.spatialBlend = 1f; // 3D
-                _audioSource.playOnAwake = false;
-
-                //Asignar al Mixer Group
-                if (audioConfig.audioMixer != null)
+                var footstepsGroup = audioConfig.audioMixer.FindMatchingGroups("FootSteps");
+                if (footstepsGroup.Length > 0)
                 {
-                    var footstepsGroup = audioConfig.audioMixer.FindMatchingGroups("FootSteps");
-                    if (footstepsGroup.Length > 0)
-                    {
-                        _audioSource.outputAudioMixerGroup = footstepsGroup[0];
-                        Debug.Log("[EnemyAudioController] AudioSource conectado a FootSteps Mixer Group");
+                    if(mainStepSource) {
+                        mainStepSource.outputAudioMixerGroup = footstepsGroup[0];
+                        mainStepSource.spatialBlend = 1f;
+                        mainStepSource.minDistance = 1f; mainStepSource.maxDistance = 20f;
                     }
-                    else
-                    {
-                        Debug.LogError("[EnemyAudioController] No se encontró el grupo 'FootSteps' en el Mixer!");
+                    if(heavyImpactSource) {
+                        heavyImpactSource.outputAudioMixerGroup = footstepsGroup[0];
+                        heavyImpactSource.spatialBlend = 1f;
+                        heavyImpactSource.minDistance = 2f; mainStepSource.maxDistance = 25f;
                     }
                 }
-
-                //Configuración 3D
-                _audioSource.minDistance = 1f;
-                _audioSource.maxDistance = 20f;
-                _audioSource.rolloffMode = AudioRolloffMode.Linear;
-                _audioSource.dopplerLevel = 0f; //Desactivar doppler
             }
         }
 
-        //Animation Events para los PASOS :/ 
+        //Evento de animacion
         public void PlayFootstepSound()
         {
-                if (audioConfig == null || audioConfig.footstepClips.Length == 0)
-                {
-                    Debug.LogWarning("[EnemyAudioController] No hay clips de pasos configurados!");
-                    return;
-                }
+            Debug.Log($"[AUDIO CHECK] Evento recibido en: {gameObject.name}");
+            
+            if (audioConfig == null) {Debug.Log("Falta audioConfig"); return;}
+            if (_mixerController == null || playerTransform == null) return;
 
-                //Clip aleatorio
+            float distance = Vector3.Distance(transform.position, playerTransform.position);
+
+            //Paso Normal
+            if (audioConfig.footstepClips.Length > 0 && mainStepSource != null)
+            {
                 AudioClip clip = audioConfig.footstepClips[Random.Range(0, audioConfig.footstepClips.Length)];
+                float pitch = _mixerController.GetFootstepPitch(distance);
+                
+                mainStepSource.pitch = pitch + Random.Range(-0.05f, 0.05f);
+                mainStepSource.PlayOneShot(clip, audioConfig.footStepVolume);
+            }
 
-                //Pitch dinámico basado en distancia para efecto pasos de gigante :D
-                float pitch = 1f;
-                if (_mixerController != null && playerTransform != null)
+            //Impacto Pesado (LFE) - Solo si está "cerca" (<15m) para ahorrar
+            if (audioConfig.heavyImpactClips != null && audioConfig.heavyImpactClips.Length > 0 && heavyImpactSource != null)
+            {
+                if(distance < 15f)
                 {
-                    float distance = Vector3.Distance(transform.position, playerTransform.position);
-                    pitch = _mixerController.GetFootstepPitch(distance);
+                    AudioClip heavyClip = audioConfig.heavyImpactClips[Random.Range(0, audioConfig.heavyImpactClips.Length)];
+                    heavyImpactSource.pitch = Random.Range(0.9f, 1.0f);
+                    heavyImpactSource.PlayOneShot(heavyClip, 1.0f); 
                 }
-                
-                float pitchVariation = Random.Range(-0.03f, 0.03f);
-                _audioSource.pitch = pitch + pitchVariation;
-                
-                _audioSource.PlayOneShot(clip, audioConfig.footStepVolume);
-
-                Debug.Log($"[EnemyAudioController] Paso reproducido | Pitch: {_audioSource.pitch:F2}");
             }
         }
     }
+}

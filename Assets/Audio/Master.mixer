@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-5748455463339991625
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: e1b6756237c34b24c834e7bc90e17d01
+  m_EffectName: ParamEQ
+  m_MixLevel: 8ca5499a3b65de545a003581dbc9a9ef
+  m_Parameters:
+  - m_ParameterName: Center freq
+    m_GUID: 56575df03b66359439f0e2d2a731553b
+  - m_ParameterName: Octave range
+    m_GUID: 1e4bc62fe102b024aafd32933004a247
+  - m_ParameterName: Frequency gain
+    m_GUID: d2e531a3288b5f64c8c92dc1a1a7f5d0
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 1
 --- !u!243 &-5725254254825952055
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -105,8 +125,10 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: e9bdf2d2da46a1d42b1c96595c0b22e2
     name: FootstepsVolume
-  - guid: 2a25c94bcc19544498b2e293b551fd54
-    name: FootstepsCutoff
+  - guid: d2e531a3288b5f64c8c92dc1a1a7f5d0
+    name: FootstepsBassBoost
+  - guid: aaa557f030c3f9e4189de2aa8415e32b
+    name: FootstepsReverbDecay
   - guid: 2fb713cf57f44434fbefb9a2b361b492
     name: MusicVolume
   m_AudioMixerGroupViews:
@@ -164,7 +186,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 9958c205922e73b4d9292926effef8cd
   m_FloatValues:
-    e9bdf2d2da46a1d42b1c96595c0b22e2: 10.437403
+    e9bdf2d2da46a1d42b1c96595c0b22e2: 0.10800299
     f3c97b3757fb64643a43a94ac443f35b: 0
     2a25c94bcc19544498b2e293b551fd54: 22000
   m_TransitionOverrides: {}
@@ -197,24 +219,51 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 7726014970623804963}
-  - {fileID: 6613315867336970608}
+  - {fileID: -5748455463339991625}
+  - {fileID: 4192130605781995436}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &6613315867336970608
+--- !u!244 &4192130605781995436
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: f98dfc3e12fb1644cb4b9ec7f9b6af84
-  m_EffectName: Lowpass Simple
-  m_MixLevel: 8f54082d98146bc419adada5549f07cc
+  m_EffectID: 4cd33d44a19bc7f428773f35483e6a02
+  m_EffectName: SFX Reverb
+  m_MixLevel: 0d60a0e9c2104a143beff4e9e83bdf95
   m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 2a25c94bcc19544498b2e293b551fd54
+  - m_ParameterName: Dry Level
+    m_GUID: ce094cce36a152f4db5dcf16ca0edb04
+  - m_ParameterName: Room
+    m_GUID: af4da3466e13fcf4ca677b2a072ac7e8
+  - m_ParameterName: Room HF
+    m_GUID: 86df94d5d8446b746ab56365269bdfa1
+  - m_ParameterName: Decay Time
+    m_GUID: aaa557f030c3f9e4189de2aa8415e32b
+  - m_ParameterName: Decay HF Ratio
+    m_GUID: f2cdb4c7f27eaa842a9ac0f8e49793a3
+  - m_ParameterName: Reflections
+    m_GUID: a8ad446faae0f344892752dc3acdf8d7
+  - m_ParameterName: Reflect Delay
+    m_GUID: 3dbb9681aa65f0d40a64e9d3ca68fb6c
+  - m_ParameterName: Reverb
+    m_GUID: cb9fe7e1a90e4534982f106871192bc3
+  - m_ParameterName: Reverb Delay
+    m_GUID: 75e574aeed55f4143b60f14cf4d0278f
+  - m_ParameterName: Diffusion
+    m_GUID: 585cff9be1ca7a24c9ace6c6b998e552
+  - m_ParameterName: Density
+    m_GUID: c0e613d8801a07b43b32fb7ad0914ed4
+  - m_ParameterName: HF Reference
+    m_GUID: bde5e9bf361728343b9350f6c9e9aa45
+  - m_ParameterName: Room LF
+    m_GUID: 8de14cbd87cc89a4ba729130da503bca
+  - m_ParameterName: LF Reference
+    m_GUID: ebefeca074961c3428b49a5b5c1ae3ee
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
