@@ -10,7 +10,7 @@ namespace Components
     [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class EnemyVisibilityDetector : MonoBehaviour, IVisibilityDetector
     {
-        //Usare un metodo de frustum culling  y raycast para detectar si el enemigo es visible para la camara principal
+        //Usare un metodo de frustum culling y raycast para detectar si el enemigo es visible para la camara principal
         [SerializeField] private EnemyConfiguration config;
 
         public event System.Action<bool> OnVisibilityChanged;
@@ -108,6 +108,7 @@ namespace Components
 
             if (Physics.Raycast(ray, out RaycastHit hit, distanceToEnemy, config.detectionLayerMask))
             {
+                Debug.Log($"Raycast hit: {hit.transform.name} on layer {LayerMask.LayerToName(hit.transform.gameObject.layer)}");    
                 return hit.transform == transform || hit.transform.IsChildOf(transform);
             }
             return false;

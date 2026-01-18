@@ -19,5 +19,5 @@ MonoBehaviour:
   frustumMargin: 0.1
   detectionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
   walkSpeedParameter: Speed

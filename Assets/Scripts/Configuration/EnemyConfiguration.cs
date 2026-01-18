@@ -7,7 +7,7 @@ namespace Configuration
     {
         [Header("Movement Settings")]
         [Tooltip("Velocidad de movimiento del enemigo")]
-        public float moveSpeed = 3.5f;
+        public float moveSpeed = 2f;
         
         [Tooltip("Rango dentro del cual el enemigo puede activarse")]
         public float activationRange = 15f;
@@ -28,5 +28,12 @@ namespace Configuration
         [Header("Animation Settings")]
         [Tooltip("Nombre del parametro de velocidad en el Animator")]
         public string walkSpeedParameter = "Speed";
+        
+        [Header("navMesh Avoindance")]
+        [Tooltip("Evitar obstaculos")]
+        [Range(0, 99)]
+        public int avoidancePriority = 50;
+        [Tooltip("Radio de evitación de otros agentes")]
+        public float avoidanceRadius = 0.5f;
     }
 }

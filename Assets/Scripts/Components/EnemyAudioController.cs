@@ -32,10 +32,6 @@ namespace Components
         private void Start()
         {
             _mixerController = AudioMixerController.Instance;
-            if (_mixerController == null)
-            {
-                Debug.LogError("[EnemyAudioController] No se encontró AudioMixerController en la escena!");
-            }
         }
 
         private void ConfigureAudioSource()
